@@ -8,8 +8,8 @@ namespace ProductService.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly AppDBContext _dbContext;
-        public ProductRepository(AppDBContext dbContext)
+        private readonly ProductDBContext _dbContext;
+        public ProductRepository(ProductDBContext dbContext)
         {
             _dbContext = dbContext;
         }

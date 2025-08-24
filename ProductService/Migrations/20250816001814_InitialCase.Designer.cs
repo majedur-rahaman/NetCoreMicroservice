@@ -10,7 +10,7 @@ using ProductService.Data;
 
 namespace ProductService.Migrations
 {
-    [DbContext(typeof(AppDBContext))]
+    [DbContext(typeof(ProductDBContext))]
     [Migration("20250816001814_InitialCase")]
     partial class InitialCase
     {
