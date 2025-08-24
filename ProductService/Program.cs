@@ -20,14 +20,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-//using (var scope = app.Services.CreateScope())
-//{
-//    var dbContext = scope.ServiceProvider.GetRequiredService<ProductDBContext>();
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ProductDBContext>();
 
-//    // Drop and recreate database
-//    dbContext.Database.EnsureDeleted();
-//    dbContext.Database.Migrate(); // applies all migrations
-//}
+    // Drop and recreate database
+    dbContext.Database.EnsureDeleted();
+    dbContext.Database.Migrate(); // applies all migrations
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

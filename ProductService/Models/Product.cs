@@ -11,6 +11,7 @@
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public Boolean IsActive { get; set; }
+        public Vendor Vendor { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
     }
 }
