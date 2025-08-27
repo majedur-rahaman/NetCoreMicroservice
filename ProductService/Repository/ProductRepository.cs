@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductService.Data;
 using ProductService.IRepository;
@@ -29,7 +30,18 @@ namespace ProductService.Repository
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            return await _dbContext.Products.ToListAsync();
+            ////Lazy Loading
+            //var products = await _dbContext.Products.ToListAsync();
+            //for (int i=0;i<products.Count;i++)
+            //{
+            //    products[i].Vendor = _dbContext.Vendors.Where(v => v.Id == products[i].VendorId).FirstOrDefault();
+            //    products[i].Category = _dbContext.Categories.Where(v => v.Id == products[i].CategoryId).FirstOrDefault();
+            //}
+            //Eager Loading
+            var products = await _dbContext.Products.Include(c=>c.Category).Include(v=>v.Vendor).ToListAsync();
+
+
+            return products;
         }
 
         public async Task<int> InsertProduct(Product product)

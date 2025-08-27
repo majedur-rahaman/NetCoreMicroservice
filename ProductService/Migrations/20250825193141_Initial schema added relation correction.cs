@@ -5,7 +5,7 @@
 namespace ProductService.Migrations
 {
     /// <inheritdoc />
-    public partial class addedvendorandcreateonetomanyrelation : Migration
+    public partial class Initialschemaaddedrelationcorrection : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

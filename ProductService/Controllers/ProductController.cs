@@ -7,7 +7,7 @@ using ProductService.Models;
 
 namespace ProductService.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -21,10 +21,18 @@ namespace ProductService.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            var products = await _repository.GetProducts();
-            if (products == null)
-                return NotFound();
-            return Ok(products);
+            try
+            {
+                var products = await _repository.GetProducts();
+                if (products == null)
+                    return NotFound();
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+      
         }
 
         // GET api/<ProductController>/5

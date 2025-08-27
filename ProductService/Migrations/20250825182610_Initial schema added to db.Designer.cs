@@ -11,8 +11,8 @@ using ProductService.Data;
 namespace ProductService.Migrations
 {
     [DbContext(typeof(ProductDBContext))]
-    [Migration("20250824185844_added vendor and create one to many relationship with product")]
-    partial class addedvendorandcreateonetomanyrelationshipwithproduct
+    [Migration("20250825182610_Initial schema added to db")]
+    partial class Initialschemaaddedtodb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,6 +58,9 @@ namespace ProductService.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -70,6 +73,9 @@ namespace ProductService.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -111,7 +117,7 @@ namespace ProductService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vendor");
+                    b.ToTable("Vendors");
                 });
 
             modelBuilder.Entity("CategoryProduct", b =>
@@ -132,17 +138,12 @@ namespace ProductService.Migrations
             modelBuilder.Entity("ProductService.Models.Product", b =>
                 {
                     b.HasOne("ProductService.Models.Vendor", "Vendor")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Vendor");
-                });
-
-            modelBuilder.Entity("ProductService.Models.Vendor", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
